@@ -8,7 +8,7 @@ export class GifsService {
   public gifList: Gif[] = [];
 
   private _tagsHistory: string[] = [];
-  private apiKey:       string = 'dGMJW12nlHSz46O3sy81BZFryoPshmUk';
+  private apiKey:       string = '';
   private serviceUrl:   string = 'https://api.giphy.com/v1/gifs';
 
   constructor( private http: HttpClient ) {
@@ -21,7 +21,7 @@ export class GifsService {
   }
 
   private organizeHistory(tag: string) {
-    tag = tag.toLowerCase();
+    tag = tag?.toLowerCase();
 
     if ( this._tagsHistory.includes( tag ) ) {
       this._tagsHistory = this._tagsHistory.filter( (oldTag) => oldTag !== tag )
@@ -48,6 +48,7 @@ export class GifsService {
 
   searchTag( tag: string ):void {
     if ( tag.length === 0 ) return;
+    console.log(tag)
     this.organizeHistory(tag);
 
     const params = new HttpParams()
